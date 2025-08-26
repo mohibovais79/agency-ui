@@ -1,141 +1,137 @@
-import {
-  Navbar as HeroUINavbar,
-  NavbarContent,
-  NavbarMenu,
-  NavbarMenuToggle,
-  NavbarBrand,
-  NavbarItem,
-  NavbarMenuItem,
-} from "@heroui/navbar";
-import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
-import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
-import NextLink from "next/link";
-import clsx from "clsx";
+// components/navbar.tsx
+"use client";
 
-import { siteConfig } from "@/config/site";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
 import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
-  SearchIcon,
-  Logo,
-} from "@/components/icons";
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+  Navbar as NextUINavbar,
+} from "@heroui/navbar";
+import { clsx } from "clsx";
+import { useEffect, useState } from "react";
+
+import { ThemeSwitch } from "@/components/theme-switch";
+
+// A simple placeholder logo component. Replace with your actual SVG or Image.
+const Logo = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Effect to handle scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
       }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function to remove the event listener
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const menuItems = [
+    { label: "Stats", href: "#stats" },
+    { label: "Case Studies", href: "#case-studies" },
+    { label: "Contact", href: "#contact" },
+  ];
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
-          </NextLink>
-        </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium",
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
-        </ul>
+    <NextUINavbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      maxWidth="xl"
+      isBordered={isScrolled} // Add a border only when scrolled
+      className={clsx(
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300",
+        {
+          "bg-background/80 backdrop-blur-md": isScrolled, // Apply blur effect on scroll
+          "bg-transparent": !isScrolled,
+        }
+      )}
+    >
+      {/* Left side: Mobile Menu Toggle & Brand */}
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>
-            <TwitterIcon className="text-default-500" />
+      <NavbarContent className="sm:hidden pr-3" justify="center">
+        <NavbarBrand>
+          <Logo />
+          <p className="font-bold text-inherit ml-2">ConsultCo</p>
+        </NavbarBrand>
+      </NavbarContent>
+
+      {/* Center: Desktop Menu */}
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarBrand>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo />
+            <p className="font-bold text-inherit">ConsultCo</p>
           </Link>
-          <Link isExternal aria-label="Discord" href={siteConfig.links.discord}>
-            <DiscordIcon className="text-default-500" />
-          </Link>
-          <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-            <GithubIcon className="text-default-500" />
-          </Link>
+        </NavbarBrand>
+        {menuItems.map((item, index) => (
+          <NavbarItem key={`${item.label}-${index}`}>
+            <Link color="foreground" href={item.href}>
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
+
+      {/* Right side: Theme Switch & CTA */}
+      <NavbarContent justify="end">
+        <NavbarItem className="hidden sm:flex">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
+        <NavbarItem>
           <Button
-            isExternal
             as={Link}
-            className="text-sm font-normal text-default-600 bg-default-100"
-            href={siteConfig.links.sponsor}
-            startContent={<HeartFilledIcon className="text-danger" />}
-            variant="flat"
+            color="primary"
+            href="YOUR_CALENDLY_LINK_HERE" // <-- IMPORTANT: Add your link
+            target="_blank"
+            variant="solid"
           >
-            Sponsor
+            Schedule a Call
           </Button>
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal aria-label="Github" href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <ThemeSwitch />
-        <NavbarMenuToggle />
-      </NavbarContent>
-
+      {/* Mobile Menu */}
       <NavbarMenu>
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item.label}-${index}`}>
+            <Link
+              className="w-full"
+              color="foreground"
+              href={item.href}
+              size="lg"
+              onPress={() => setIsMenuOpen(false)} // Close menu on link click
+            >
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+        <NavbarMenuItem>
+          <ThemeSwitch />
+        </NavbarMenuItem>
       </NavbarMenu>
-    </HeroUINavbar>
+    </NextUINavbar>
   );
 };

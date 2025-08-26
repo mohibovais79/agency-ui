@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    // ... any existing configuration
+};
 
-module.exports = nextConfig;
+export default nextConfig; // This is ES Module syntax
