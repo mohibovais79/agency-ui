@@ -1,3 +1,74 @@
+/* 1. Tailwind v4 directives MUST be at the absolute top. */
 @import "tailwindcss";
+@config "../tailwind.config.js";
 
-@config "../tailwind.config.js"
+/* 2. Add your custom styles inside Tailwind's @layer directives. */
+
+@layer base {
+
+    /* Styles for base HTML elements go here */
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+
+    /* Custom component classes go here */
+    /* --- Tech Marquee Animation --- */
+    .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        -webkit-mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent);
+        mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent);
+    }
+
+
+.marquee-track {
+    display: flex;
+    /* This calculation is now correct because of box-sizing */
+    width: calc(280px * 32); /* 280px per item * 16 items * 2 */
+    animation: scroll 60s linear infinite;
+    will-change: transform;
+}
+
+
+   .marquee-item {
+    flex-shrink: 0;
+    width: 280px;
+    box-sizing: border-box; /* <-- THIS IS THE FIX */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem;
+}
+
+    .marquee-item svg {
+        width: 56px;
+        height: 56px;
+        transition: transform 0.2s ease-in-out;
+
+    }
+
+    .marquee-item:hover svg {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .marquee-item:hover .marquee-item-name {
+        color: hsl(var(--nextui-primary));
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+}
