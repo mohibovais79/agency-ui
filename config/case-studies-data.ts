@@ -37,7 +37,7 @@ export const caseStudiesData: Record<string, CaseStudy[]> = {
         {
             id: 7,
             title: "Customer Segmentation for Marketing Campaigns",
-            thumbnailUrl: "https://images.unsplash.com/photo-1591696205602-2f950c417cb1?q=80&w=400",
+            thumbnailUrl: "https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?q=80&w=400&h=300&fit=crop",
             summary: "Boosted marketing campaign ROI by 45% through targeted audience segments.",
             details: "Using clustering algorithms, we analyzed customer behavior and demographic data to identify distinct segments. This allowed our client to tailor their marketing messages and promotions, resulting in higher engagement and conversion rates.",
         },
@@ -47,7 +47,7 @@ export const caseStudiesData: Record<string, CaseStudy[]> = {
         {
             id: 11,
             title: "Mobile App UX/UI Overhaul for a FinTech Startup",
-            thumbnailUrl: "https://images.unsplash.com/photo-1581287053822-fd7bf4f4bf3f?q=80&w=400",
+            thumbnailUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=400&h=300&q=80",
             summary: "Improved user retention by 25% with an intuitive and modern interface.",
             details: "Through extensive user research and usability testing, we redesigned the entire mobile application from the ground up. The new design focused on simplifying complex financial tasks, resulting in a more engaging and user-friendly experience.",
         },

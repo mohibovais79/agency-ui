@@ -15,7 +15,6 @@ import {
 import { clsx } from "clsx";
 import { useEffect, useState } from "react";
 
-import { ThemeSwitch } from "@/components/theme-switch";
 
 // A simple placeholder logo component. Replace with your actual SVG or Image.
 const Logo = () => (
@@ -98,7 +97,6 @@ export const Navbar = () => {
       {/* Right side: Theme Switch & CTA */}
       <NavbarContent justify="end">
         <NavbarItem className="hidden sm:flex">
-          <ThemeSwitch />
         </NavbarItem>
         <NavbarItem>
           <Button
@@ -129,7 +127,6 @@ export const Navbar = () => {
           </NavbarMenuItem>
         ))}
         <NavbarMenuItem>
-          <ThemeSwitch />
         </NavbarMenuItem>
       </NavbarMenu>
     </NextUINavbar>

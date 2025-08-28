@@ -14,7 +14,7 @@ export function ExpandableCaseStudyItem({ study }: Props) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     return (
-        <div className="border-b border-white/20">
+        <div className="border-b border-default-200 last:border-b-0">
             <motion.button
                 className="w-full flex items-center justify-between p-4 text-left"
                 onClick={() => setIsExpanded(!isExpanded)}
@@ -29,8 +29,8 @@ export function ExpandableCaseStudyItem({ study }: Props) {
                         className="rounded-md object-cover"
                     />
                     <div>
-                        <h4 className="font-semibold">{study.title}</h4>
-                        <p className="text-sm text-default-400">{study.summary}</p>
+                        <h4 className="font-semibold text-default-800">{study.title}</h4>
+                        <p className="text-sm text-default-600">{study.summary}</p>
                     </div>
                 </div>
                 <motion.div animate={{ rotate: isExpanded ? 180 : 0 }}>
@@ -49,7 +49,7 @@ export function ExpandableCaseStudyItem({ study }: Props) {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <p className="p-4 pt-0 text-default-300">{study.details}</p>
+                        <p className="px-4 pb-4 text-default-700">{study.details}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
