@@ -46,7 +46,7 @@ export const caseStudiesData: Record<string, CaseStudy[]> = {
     Design: [
         {
             id: 11,
-            title: "Mobile App UX/UI Overhaul for a FinTech Startup",
+            title: "Karachi Kings",
             thumbnailUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=400&h=300&q=80",
             summary: "Improved user retention by 25% with an intuitive and modern interface.",
             details: "Through extensive user research and usability testing, we redesigned the entire mobile application from the ground up. The new design focused on simplifying complex financial tasks, resulting in a more engaging and user-friendly experience.",
