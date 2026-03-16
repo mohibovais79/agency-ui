@@ -37,18 +37,35 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen text-foreground bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans text-foreground antialiased",
           fontSans.variable,
         )}
       >
         <Providers>
-          <div className="relative flex flex-col h-screen">
+          <div className="relative flex min-h-screen flex-col overflow-hidden">
+            <div aria-hidden className="noise-overlay" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-[-20%] z-0 h-[520px] opacity-60 blur-[160px]"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(151,99,255,0.45), transparent 55%)",
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-[-10%] z-0 h-[420px] opacity-50 blur-[140px]"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(25,196,212,0.35), transparent 60%)",
+              }}
+            />
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-grow flex-col gap-20 px-4 pb-20 pt-32 md:px-8">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
-
+            <footer className="relative z-10 w-full py-6 text-center text-sm text-white/60">
+              © {new Date().getFullYear()} {siteConfig.name}. Crafted with intent.
             </footer>
           </div>
         </Providers>

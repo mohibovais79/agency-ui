@@ -5,57 +5,135 @@
 /* 2. Add your custom styles inside Tailwind's @layer directives. */
 
 @layer base {
+    :root {
+        --surface-base: rgba(4, 7, 19, 0.75);
+        --surface-elevated: rgba(9, 14, 31, 0.9);
+        --surface-border: rgba(255, 255, 255, 0.08);
+        --text-muted: rgba(226, 232, 255, 0.7);
+        --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 0h80v80H0zM80 80h80v80H80z'/%3E%3C/g%3E%3Cg fill='%23000000' fill-opacity='0.04'%3E%3Cpath d='M80 0h80v80H80zM0 80h80v80H0z'/%3E%3C/g%3E%3C/svg%3E");
+    }
 
-    /* Styles for base HTML elements go here */
     html {
         scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: #01030b;
+        background-image:
+            radial-gradient(circle at 20% 20%, rgba(151, 99, 255, 0.35), transparent 55%),
+            radial-gradient(circle at 80% 0%, rgba(63, 214, 228, 0.25), transparent 45%),
+            radial-gradient(circle at 20% 80%, rgba(17, 24, 48, 0.8), transparent 50%),
+            linear-gradient(120deg, #050915 0%, #01030b 60%, #050915 100%);
+        color: #eef1ff;
+        min-height: 100vh;
+    }
+
+    ::selection {
+        background-color: rgba(151, 99, 255, 0.35);
+        color: #fff;
     }
 }
 
 @layer components {
+    .glass-panel {
+        background: linear-gradient(140deg, var(--surface-elevated), rgba(6, 9, 21, 0.85));
+        border: 1px solid var(--surface-border);
+        box-shadow: 0 30px 100px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(24px);
+    }
 
-    /* Custom component classes go here */
+    .gradient-border {
+        position: relative;
+        border-radius: 1.5rem;
+    }
+
+    .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        background: linear-gradient(130deg, rgba(151, 99, 255, 0.9), rgba(63, 214, 228, 0.7));
+        opacity: 0.6;
+        z-index: -2;
+    }
+
+    .gradient-border::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: var(--surface-base);
+        z-index: -1;
+    }
+
+    .section-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(151, 99, 255, 0.1);
+        border: 1px solid rgba(151, 99, 255, 0.3);
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+    }
+
+    .noise-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: var(--noise);
+        opacity: 0.4;
+        mix-blend-mode: soft-light;
+    }
+
     /* --- Tech Marquee Animation --- */
     .marquee-container {
         width: 100%;
         overflow: hidden;
         position: relative;
-        -webkit-mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent);
-        mask-image: linear-gradient(to right, transparent, white 30%, white 70%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
+        mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
     }
 
+    .marquee-track {
+        display: flex;
+        width: calc(240px * 32);
+        animation: scroll 55s linear infinite;
+        will-change: transform;
+    }
 
-.marquee-track {
-    display: flex;
-    /* This calculation is now correct because of box-sizing */
-    width: calc(280px * 32); /* 280px per item * 16 items * 2 */
-    animation: scroll 60s linear infinite;
-    will-change: transform;
-}
-
-
-   .marquee-item {
-    flex-shrink: 0;
-    width: 280px;
-    box-sizing: border-box; /* <-- THIS IS THE FIX */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 1rem;
-}
+    .marquee-item {
+        flex-shrink: 0;
+        width: 240px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+        padding: 1.2rem;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(5, 10, 24, 0.65);
+        backdrop-filter: blur(14px);
+        transition: transform 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    }
 
     .marquee-item svg {
-        width: 56px;
-        height: 56px;
+        width: 52px;
+        height: 52px;
         transition: transform 0.2s ease-in-out;
+    }
 
+    .marquee-item:hover {
+        transform: translateY(-4px);
+        border-color: rgba(151, 99, 255, 0.6);
     }
 
     .marquee-item:hover svg {
-        transform: scale(1.1);
-        transition: transform 0.2s ease-in-out;
+        transform: scale(1.08);
     }
 
     .marquee-item:hover .marquee-item-name {

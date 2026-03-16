@@ -5,34 +5,40 @@ import { motion } from "framer-motion";
 
 // Replace these with your actual client logo URLs or SVG components
 const clientLogos = [
-  { name: "Client A", src: "https://via.placeholder.com/150x60.png?text=Client+A" },
-  { name: "Client B", src: "https://via.placeholder.com/150x60.png?text=Client+B" },
-  { name: "Client C", src: "https://via.placeholder.com/150x60.png?text=Client+C" },
-  { name: "Client D", src: "https://via.placeholder.com/150x60.png?text=Client+D" },
-  { name: "Client E", src: "https://via.placeholder.com/150x60.png?text=Client+E" },
+  { name: "Fluxgrid", src: "https://via.placeholder.com/150x60.png?text=Fluxgrid" },
+  { name: "Northwind", src: "https://via.placeholder.com/150x60.png?text=Northwind" },
+  { name: "SignalOps", src: "https://via.placeholder.com/150x60.png?text=SignalOps" },
+  { name: "Oculus Labs", src: "https://via.placeholder.com/150x60.png?text=Oculus" },
+  { name: "Italic", src: "https://via.placeholder.com/150x60.png?text=Italic" },
+  { name: "Nova", src: "https://via.placeholder.com/150x60.png?text=Nova" },
 ];
 
 
 export function ClientLogosSection() {
     return (
-        <section className="w-full py-16">
+        <section className="relative w-full py-20">
             <motion.div
-                className="max-w-5xl mx-auto px-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8 }}
+                className="glass-panel gradient-border relative mx-auto max-w-5xl px-8 py-12 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.7 }}
             >
-                <h3 className="text-center text-lg font-semibold text-default-500 mb-8">
-                    TRUSTED BY INDUSTRY-LEADING COMPANIES
+                <div aria-hidden className="noise-overlay" />
+                <p className="section-eyebrow mx-auto">Operators we build alongside</p>
+                <h3 className="mt-4 text-2xl font-semibold text-white">
+                    Trusted by AI-native founders, Fortune 100 skunkworks, and ambitious GTM teams.
                 </h3>
-                <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
+                <p className="mt-3 text-base text-white/65">
+                    We embed with product, revops, and research pods to ship measurable impact inside complex orgs.
+                </p>
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
                     {clientLogos.map((logo) => (
                         <img
                             key={logo.name}
                             src={logo.src}
                             alt={logo.name}
-                            className="h-8 filter grayscale hover:grayscale-0 transition-all duration-300"
+                            className="h-9 opacity-70 transition hover:opacity-100"
                         />
                     ))}
                 </div>

@@ -73,7 +73,7 @@ export const Navbar = () => {
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Logo />
-          <p className="font-bold text-inherit ml-2">ConsultCo</p>
+          <p className="font-bold text-inherit ml-2">Traysyz</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -82,7 +82,7 @@ export const Navbar = () => {
         <NavbarBrand>
           <Link href="/" className="flex items-center gap-2">
             <Logo />
-            <p className="font-bold text-inherit">ConsultCo</p>
+            <p className="font-bold text-inherit">Traysyz</p>
           </Link>
         </NavbarBrand>
         {menuItems.map((item, index) => (
