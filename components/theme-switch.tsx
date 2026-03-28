@@ -11,9 +11,7 @@ export interface ThemeSwitchProps {
   className?: string;
 }
 
-export const ThemeSwitch: FC<ThemeSwitchProps> = ({
-  className,
-}) => {
+export const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
   const { theme, setTheme } = useTheme();
   const isSSR = useIsSSR();
 
@@ -25,19 +23,15 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
 
   return (
     <button
-      type="button"
-      onClick={onChange}
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
       className={clsx(
         "flex items-center justify-center rounded-lg p-2 transition-opacity hover:opacity-80 cursor-pointer",
         className,
       )}
+      type="button"
+      onClick={onChange}
     >
-      {isLight ? (
-        <SunFilledIcon size={22} />
-      ) : (
-        <MoonFilledIcon size={22} />
-      )}
+      {isLight ? <SunFilledIcon size={22} /> : <MoonFilledIcon size={22} />}
     </button>
   );
 };

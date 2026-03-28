@@ -13,6 +13,9 @@ import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
 
+// 1. IMPORT THE NEXT PLUGIN DIRECTLY
+import nextPlugin from "@next/eslint-plugin-next";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
@@ -48,7 +51,7 @@ export default defineConfig([globalIgnores([
         "plugin:prettier/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
-        "plugin:@next/next/recommended",
+        // 2. REMOVED: "plugin:@next/next/recommended" from here
     )),
 
     plugins: {
@@ -58,6 +61,8 @@ export default defineConfig([globalIgnores([
         "@typescript-eslint": typescriptEslint,
         "jsx-a11y": fixupPluginRules(jsxA11Y),
         prettier: fixupPluginRules(prettier),
+        // 3. REGISTER NEXT.JS PLUGIN DIRECTLY
+        "@next/next": nextPlugin, 
     },
 
     languageOptions: {
@@ -86,6 +91,11 @@ export default defineConfig([globalIgnores([
     files: ["**/*.ts", "**/*.tsx"],
 
     rules: {
+        // 4. INJECT NEXT.JS RECOMMENDED RULES MANUALLY
+        ...nextPlugin.configs.recommended.rules,
+        ...nextPlugin.configs["core-web-vitals"].rules,
+
+        // Your existing custom rules below:
         "no-console": "warn",
         "react/prop-types": "off",
         "react/jsx-uses-react": "off",

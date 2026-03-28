@@ -1,13 +1,14 @@
 import "@/styles/globals.css";
 import clsx from "clsx";
 import { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Providers } from "./providers";
 
 import { Navbar } from "@/components/navbar";
+import { FooterSection } from "@/components/sections/FooterSection";
 import { fontSans } from "@/config/fonts";
 import { siteConfig } from "@/config/site";
-import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: {
@@ -64,9 +65,7 @@ export default function RootLayout({
             <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-grow flex-col gap-20 px-4 pb-20 pt-32 md:px-8">
               {children}
             </main>
-            <footer className="relative z-10 w-full py-6 text-center text-sm text-white/60">
-              © {new Date().getFullYear()} {siteConfig.name}. Crafted with intent.
-            </footer>
+            <FooterSection />
           </div>
         </Providers>
         <Analytics />

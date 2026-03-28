@@ -25,7 +25,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <HeroUIProvider navigate={router.push}>
-      <NextThemesProvider forcedTheme="light">{children}</NextThemesProvider>
+      <NextThemesProvider attribute="class" defaultTheme="dark">
+        {children}
+      </NextThemesProvider>
     </HeroUIProvider>
   );
 }
