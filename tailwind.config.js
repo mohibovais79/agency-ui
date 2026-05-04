@@ -1,98 +1,89 @@
-// tailwind.config.js
-
-// 1. Import the heroui plugin using ES Module syntax
 import { heroui } from "@heroui/theme";
 
-const auroraPrimary = {
-  50: "#F7F5FF",
-  100: "#E8E5FF",
-  200: "#D8CFFF",
-  300: "#C2ADFF",
-  400: "#AD85FF",
-  500: "#9763FF",
-  600: "#8544FF",
-  700: "#6B2EE6",
-  800: "#4B1FB6",
-  900: "#2E147A",
-  950: "#1C0C4D",
+const violet = {
+  50:  "#F5F3FF",
+  100: "#EDE9FE",
+  200: "#DDD6FE",
+  300: "#C4B5FD",
+  400: "#A78BFA",
+  500: "#8B5CF6",
+  600: "#7C3AED",
+  700: "#6D28D9",
+  800: "#5B21B6",
+  900: "#4C1D95",
+  950: "#2E1065",
 };
 
-const neonCyan = {
-  50: "#EFFFFF",
-  100: "#CFF7FB",
-  200: "#A0EEF5",
-  300: "#6AE4EE",
-  400: "#3FD6E4",
-  500: "#19C4D4",
-  600: "#079FB2",
-  700: "#067E8E",
-  800: "#075E6B",
-  900: "#053F46",
-  950: "#03272C",
+const cyan = {
+  50:  "#ECFEFF",
+  100: "#CFFAFE",
+  200: "#A5F3FC",
+  300: "#67E8F9",
+  400: "#22D3EE",
+  500: "#06B6D4",
+  600: "#0891B2",
+  700: "#0E7490",
+  800: "#155E75",
+  900: "#164E63",
+  950: "#083344",
 };
 
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
-    // Your app's files
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
-    // 2. IMPORTANT: Add this line to include HeroUI components
     "./node_modules/@heroui/*/{dist,src}/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+      },
       boxShadow: {
-        glow: "0 0 50px rgba(151, 99, 255, 0.35)",
+        glow:      "0 0 40px rgba(139,92,246,0.45), 0 0 80px rgba(139,92,246,0.15)",
+        "glow-sm": "0 0 18px rgba(139,92,246,0.35)",
+        card:      "0 4px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)",
+        "card-hover": "0 8px 48px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06)",
+      },
+      backgroundImage: {
+        "dot-grid": "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
+      },
+      backgroundSize: {
+        "dot-grid": "28px 28px",
       },
     },
   },
   darkMode: "class",
-  // 3. Add the heroui plugin to the plugins array
   plugins: [
-    // 2. Configure the heroui plugin according to the documentation
     heroui({
-      // The `themes` option allows us to define custom colors
       themes: {
         light: {
           colors: {
-            background: "#020617",
-            foreground: "#EEF1FF",
-            primary: {
-              ...auroraPrimary,
-              DEFAULT: auroraPrimary[500],
-            },
-            secondary: {
-              ...neonCyan,
-              DEFAULT: neonCyan[400],
-            },
-            focus: neonCyan[300],
-            divider: "rgba(255,255,255,0.08)",
-            content1: "#050B18",
-            content2: "#0B1224",
-            content3: "#111830",
-            content4: "#19203D",
+            background: "#06090F",
+            foreground: "#E8EDFF",
+            primary:   { ...violet, DEFAULT: violet[500] },
+            secondary: { ...cyan,   DEFAULT: cyan[400]   },
+            focus: cyan[300],
+            divider: "rgba(255,255,255,0.06)",
+            content1: "#07090F",
+            content2: "#0B0F1E",
+            content3: "#0F1528",
+            content4: "#141B32",
           },
         },
         dark: {
           colors: {
-            background: "#01030B",
-            foreground: "#F0F4FF",
-            primary: {
-              ...auroraPrimary,
-              DEFAULT: auroraPrimary[400],
-            },
-            secondary: {
-              ...neonCyan,
-              DEFAULT: neonCyan[300],
-            },
-            focus: auroraPrimary[200],
-            divider: "rgba(17,24,39,0.6)",
-            content1: "#040713",
-            content2: "#070C1D",
-            content3: "#0F1426",
-            content4: "#161B31",
+            background: "#06090F",
+            foreground: "#E8EDFF",
+            primary:   { ...violet, DEFAULT: violet[400] },
+            secondary: { ...cyan,   DEFAULT: cyan[300]   },
+            focus: violet[300],
+            divider: "rgba(255,255,255,0.06)",
+            content1: "#07090F",
+            content2: "#0B0F1E",
+            content3: "#0F1528",
+            content4: "#141B32",
           },
         },
       },
@@ -100,5 +91,4 @@ const config = {
   ],
 };
 
-// 4. Export the config using ES Module syntax
 export default config;

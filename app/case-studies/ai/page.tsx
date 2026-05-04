@@ -53,12 +53,14 @@ export default function AICaseStudiesPage() {
               className="group block overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl transition hover:border-primary/50 hover:bg-white/10"
               href={`/case-studies/ai/${study.id}`}
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative overflow-hidden">
                 <Image
-                  fill
                   alt={study.title}
-                  className="object-cover transition duration-500 group-hover:scale-105"
+                  className="block w-full h-auto transition duration-500 group-hover:scale-105"
                   src={study.thumbnailUrl}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </div>

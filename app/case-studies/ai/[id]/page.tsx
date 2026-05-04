@@ -78,16 +78,18 @@ export default function AICaseStudyDetailPage({
         {/* Hero Image */}
         <motion.div
           animate={{ opacity: 1, scale: 1 }}
-          className="relative mb-16 aspect-video overflow-hidden rounded-3xl border border-white/10"
+          className="mb-16 overflow-hidden rounded-3xl border border-white/10"
           initial={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <Image
-            fill
             priority
             alt={study.title}
-            className="object-cover"
+            className="block w-full h-auto"
             src={study.thumbnailUrl}
+            width={0}
+            height={0}
+            sizes="100vw"
           />
         </motion.div>
 
@@ -144,12 +146,14 @@ export default function AICaseStudyDetailPage({
             >
               {study.images.map((image, index) => (
                 <div key={index} className="space-y-3">
-                  <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10">
+                  <div className="overflow-hidden rounded-2xl border border-white/10">
                     <Image
-                      fill
                       alt={image.caption}
-                      className="object-cover"
+                      className="block w-full h-auto"
                       src={image.url}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
                     />
                   </div>
                   <p className="text-center text-sm text-white/60">

@@ -1,4 +1,3 @@
-// components/navbar.tsx
 "use client";
 
 import { Button } from "@heroui/button";
@@ -13,132 +12,103 @@ import {
   Navbar as NextUINavbar,
 } from "@heroui/navbar";
 import { clsx } from "clsx";
-import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-// A simple placeholder logo component. Replace with your actual SVG or Image.
 const Logo = () => (
-  <svg
-    fill="none"
-    height="32"
-    viewBox="0 0 24 24"
-    width="32"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#A78BFA" />
+        <stop offset="100%" stopColor="#22D3EE" />
+      </linearGradient>
+    </defs>
     <path
-      d="M12 2L2 7L12 12L22 7L12 2Z"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-    <path
-      d="M2 17L12 22L22 17"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-    <path
-      d="M2 12L12 17L22 12"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
+      fill="url(#logoGrad)"
     />
   </svg>
 );
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // New state for hide/show
-  const lastScrollY = useRef(0); // Ref to track previous scroll position
+  const [isMenuOpen, setIsMenuOpen]   = useState(false);
+  const [isScrolled, setIsScrolled]   = useState(false);
+  const [isVisible, setIsVisible]     = useState(true);
+  const lastScrollY                   = useRef(0);
+  const pathname                      = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // 1. Handle the blur/background styling (same as before)
-      if (currentScrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-
-      // 2. Handle the hide/show logic based on scroll direction
-      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
-        // Scrolling DOWN & past the top buffer: Hide navbar
+      const y = window.scrollY;
+      setIsScrolled(y > 12);
+      if (y > lastScrollY.current && y > 80) {
         setIsVisible(false);
-        setIsMenuOpen(false); // Optional: close mobile menu if they scroll down
-      } else if (currentScrollY < lastScrollY.current) {
-        // Scrolling UP: Show navbar
+        setIsMenuOpen(false);
+      } else if (y < lastScrollY.current) {
         setIsVisible(true);
       }
-
-      // Update the tracked scroll position
-      lastScrollY.current = currentScrollY;
+      lastScrollY.current = y;
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent, sectionId: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+    }
+  };
+
   const menuItems = [
-    { label: "Stats", href: "#stats" },
-    { label: "Case Studies", href: "#case-studies" },
-    { label: "Contact", href: "#contact" },
+    { label: "Services",     href: "/#services",     id: "services"      },
+    { label: "Case Studies", href: "/#case-studies", id: "case-studies"  },
+    { label: "Contact",      href: "/#contact",      id: "contact"       },
   ];
 
   return (
     <NextUINavbar
       classNames={{
         base: clsx(
-          "fixed top-4 inset-x-0 mx-auto w-[95%] sm:w-[85%] max-w-4xl rounded-full transition-all duration-300 ease-in-out z-50",
-          {
-            // Toggle visibility using CSS transform
-            "translate-y-0": isVisible,
-            "-translate-y-[150%] opacity-0": !isVisible, // Slides up and fades slightly
-
-            // Toggle background styles
-            "bg-background/80 backdrop-blur-md shadow-lg border border-default-200/50":
-              isScrolled,
-            "bg-transparent": !isScrolled && isVisible,
-          },
+          "fixed top-4 inset-x-0 mx-auto w-[96%] sm:w-[88%] max-w-4xl rounded-full transition-all duration-300 ease-in-out z-50",
+          isVisible ? "translate-y-0" : "-translate-y-[200%] opacity-0",
+          isScrolled
+            ? "bg-[rgba(6,9,15,0.88)] backdrop-blur-xl border border-white/[0.07] shadow-[0_8px_40px_rgba(0,0,0,0.55)]"
+            : "bg-transparent",
         ),
-        wrapper: "px-4 w-full max-w-full",
+        wrapper: "px-5 w-full max-w-full",
       }}
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
-      {/* Left side: Mobile Menu Toggle & Brand */}
+      {/* Mobile: toggle + brand */}
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        />
+        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
-
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Logo />
-          <p className="font-bold text-inherit ml-2">Traysyz</p>
+          <p className="ml-2.5 font-bold tracking-tight text-foreground">Traysyz</p>
         </NavbarBrand>
       </NavbarContent>
 
-      {/* Center: Desktop Menu */}
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarBrand className="mr-4">
-          <Link className="flex items-center gap-2" href="/">
+      {/* Desktop: brand + nav */}
+      <NavbarContent className="hidden sm:flex gap-1" justify="center">
+        <NavbarBrand className="mr-6">
+          <Link className="flex items-center gap-2.5" href="/">
             <Logo />
-            <p className="font-bold text-inherit">Traysyz</p>
+            <p className="font-bold tracking-tight text-foreground">Traysyz</p>
           </Link>
         </NavbarBrand>
-        {menuItems.map((item, index) => (
-          <NavbarItem key={`${item.label}-${index}`}>
+        {menuItems.map((item) => (
+          <NavbarItem key={item.label}>
             <Link
-              className="text-sm font-medium"
-              color="foreground"
+              className="rounded-full px-4 py-1.5 text-sm font-medium text-white/60 transition-colors hover:text-white/90"
               href={item.href}
+              onClick={(e) => handleNavClick(e, item.id)}
             >
               {item.label}
             </Link>
@@ -146,37 +116,44 @@ export const Navbar = () => {
         ))}
       </NavbarContent>
 
-      {/* Right side: Theme Switch & CTA */}
+      {/* CTA */}
       <NavbarContent justify="end">
         <NavbarItem>
           <Button
             as={Link}
-            className="rounded-full font-medium"
-            color="primary"
-            href="YOUR_CALENDLY_LINK_HERE" // <-- IMPORTANT: Add your link
-            target="_blank"
-            variant="solid"
+            className="rounded-full bg-violet-600 px-5 text-sm font-semibold text-white shadow-glow-sm hover:bg-violet-500 transition-colors"
+            href="/#contact"
+            size="sm"
+            onClick={(e) => handleNavClick(e, "contact")}
           >
-            Schedule a Call
+            Get in Touch
           </Button>
         </NavbarItem>
       </NavbarContent>
 
-      {/* Mobile Menu */}
-      <NavbarMenu className="pt-6">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.label}-${index}`}>
+      {/* Mobile menu */}
+      <NavbarMenu className="bg-[#06090F]/95 backdrop-blur-xl pt-8 pb-6 px-6">
+        {menuItems.map((item) => (
+          <NavbarMenuItem key={item.label}>
             <Link
-              className="w-full"
-              color="foreground"
+              className="w-full py-2 text-lg font-medium text-white/70 hover:text-white transition-colors"
               href={item.href}
-              size="lg"
-              onPress={() => setIsMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, item.id)}
             >
               {item.label}
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem className="mt-4">
+          <Button
+            as={Link}
+            className="w-full rounded-full bg-violet-600 font-semibold text-white shadow-glow-sm"
+            href="/#contact"
+            onClick={(e) => handleNavClick(e, "contact")}
+          >
+            Get in Touch
+          </Button>
+        </NavbarMenuItem>
       </NavbarMenu>
     </NextUINavbar>
   );

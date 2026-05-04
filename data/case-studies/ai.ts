@@ -23,8 +23,7 @@ export const aiCaseStudies: CaseStudy[] = [
   {
     id: "diabot-diabetes-care",
     title: "Diabot-AI Companion for Diabetes Care",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=800&h=600&fit=crop",
+    thumbnailUrl: "/images/case-studies/ai/diabot.jpeg",
     summary:
       "AI-powered chatbot that answers diabetes-related queries using verified doctors' data with confidence scoring.",
     client: "HealthTech Innovations",
@@ -52,21 +51,15 @@ export const aiCaseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1200&h=800&fit=crop",
-        caption:
-          "Diabot interface showing diabetes query with confidence score",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1200&h=800&fit=crop",
-        caption: "Medical data verification and confidence scoring system",
+        url: "/images/case-studies/ai/diabot.jpeg",
+        caption: "Diabot interface showing diabetes query with confidence score",
       },
     ],
   },
   {
     id: "datamind-analytical-assistant",
     title: "DataMind – Your Analytical AI Assistant",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
+    thumbnailUrl: "/images/case-studies/ai/datamind.jpeg",
     summary:
       "Transforms natural language questions into SQL/Python code for database queries with clear summaries and visualizations.",
     client: "DataAnalytics Corp",
@@ -94,21 +87,15 @@ export const aiCaseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&h=800&fit=crop",
-        caption:
-          "DataMind interface showing natural language to SQL conversion",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=1200&h=800&fit=crop",
-        caption: "Generated visualizations from database query results",
+        url: "/images/case-studies/ai/datamind.jpeg",
+        caption: "DataMind interface showing natural language to SQL conversion",
       },
     ],
   },
   {
     id: "internal-knowledge-chatbot",
     title: "Internal Knowledge Base Chatbot",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=800&h=600&fit=crop",
+    thumbnailUrl: "/images/case-studies/ai/knowledge-base-chatbot.jpeg",
     summary:
       "Secure AI-powered documentation chatbot with role-based access control and Google Sign-In authentication.",
     client: "Enterprise Solutions Ltd",
@@ -137,21 +124,15 @@ export const aiCaseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200&h=800&fit=crop",
-        caption:
-          "Internal knowledge base chatbot interface with role-based access",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1559028006-748fa4731923?q=80&w=1200&h=800&fit=crop",
-        caption: "Admin dashboard for document management and access control",
+        url: "/images/case-studies/ai/knowledge-base-chatbot.jpeg",
+        caption: "Internal knowledge base chatbot interface with role-based access",
       },
     ],
   },
   {
     id: "real-estate-whatsapp-agent",
     title: "Real Estate WhatsApp AI Agent",
-    thumbnailUrl:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=800&h=600&fit=crop",
+    thumbnailUrl: "/images/case-studies/ai/real-estate-whatsapp.jpg",
     summary:
       "Eliminated manual property lookups for Dubai brokerage by syncing listings with AI knowledge base, enabling instant WhatsApp queries.",
     client: "Dubai Properties Elite",
@@ -178,12 +159,8 @@ export const aiCaseStudies: CaseStudy[] = [
     ],
     images: [
       {
-        url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1200&h=800&fit=crop",
+        url: "/images/case-studies/ai/real-estate-whatsapp.jpg",
         caption: "WhatsApp AI agent providing instant property information",
-      },
-      {
-        url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&h=800&fit=crop",
-        caption: "Real estate dashboard with AI-powered property search",
       },
     ],
   },

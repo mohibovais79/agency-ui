@@ -1,5 +1,3 @@
-// data/case-studies/index.ts
-
 import { aiCaseStudies } from "./ai";
 import { dataCaseStudies } from "./data";
 import { designCaseStudies } from "./design";
@@ -21,6 +19,10 @@ export type CaseStudy = {
   challenge: string;
   solution: string;
   results: string[];
+  toolsUsed?: string[];
+  behanceUrl?: string;
+  behanceViews?: number;
+  behanceLikes?: number;
   images: {
     url: string;
     caption: string;

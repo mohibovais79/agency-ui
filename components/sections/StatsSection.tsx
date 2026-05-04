@@ -1,69 +1,72 @@
-// components/sections/StatsSection.tsx
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+
 const stats = [
-  { value: "14", label: "Day Sprint Cycles" },
-  { value: "100%", label: "In-House Engineering" }, // Big flex. Shows you don't just offshore their work.
-  { value: "0", label: "Technical Debt Tolerance" },
-  { value: "100%", label: "IP Ownership Transfer" }, // Founders care deeply about owning their AI IP.
+  { value: "14",   label: "Day Sprint\nCycles",       note: "Rapid, focused delivery" },
+  { value: "100%", label: "In-House\nEngineering",     note: "No outsourcing, ever"    },
+  { value: "Zero", label: "Technical\nDebt Tolerance", note: "Clean code, always"      },
+  { value: "Full", label: "IP Ownership\nTransfer",    note: "You own everything"      },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-} satisfies Variants;
+const containerVariants: Variants = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
+};
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-    },
-  },
-} satisfies Variants;
+const itemVariants: Variants = {
+  hidden:  { y: 20, opacity: 0 },
+  visible: { y: 0,  opacity: 1, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
 
 export function StatsSection() {
   return (
-    <section className="w-full py-20" id="stats">
-      <div className="relative mx-auto max-w-5xl rounded-[28px] border border-white/10 bg-gradient-to-b from-white/5 to-white/0 px-6 py-16 text-center backdrop-blur-xl">
-        <div aria-hidden className="noise-overlay" />
-        <p className="section-eyebrow mx-auto">Signal-backed impact</p>
-        <h2 className="mt-4 text-3xl font-semibold text-white">
-          Quietly compounding momentum with every build cycle.
+    <section className="w-full" id="stats">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        viewport={{ once: true, amount: 0.4 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65 }}
+        className="text-center"
+      >
+        <p className="section-eyebrow mx-auto">Signal-Backed Impact</p>
+        <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
+          Our operating principles, in numbers.
         </h2>
-        <motion.div
-          className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-4"
-          initial="hidden"
-          variants={containerVariants}
-          viewport={{ once: true, amount: 0.4 }}
-          whileInView="visible"
-        >
-          {stats.map((stat) => (
-            <motion.div
-              key={stat.label}
-              className="rounded-2xl border border-white/10 bg-white/5 py-6"
-              variants={itemVariants}
+      </motion.div>
+
+      <motion.div
+        className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.07] md:grid-cols-4"
+        style={{ background: "rgba(255,255,255,0.05)" }}
+        initial="hidden"
+        viewport={{ once: true, amount: 0.3 }}
+        whileInView="visible"
+        variants={containerVariants}
+      >
+        {stats.map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            variants={itemVariants}
+            className="group relative flex flex-col items-center justify-center gap-2 bg-[#06090F] px-6 py-10 text-center transition-colors hover:bg-white/[0.025]"
+          >
+            {/* Top accent rule */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-12 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{ background: "linear-gradient(90deg, #A78BFA, #22D3EE)" }}
+            />
+            <p
+              className="text-4xl font-bold tracking-tight text-white md:text-5xl"
+              style={{ fontVariantNumeric: "tabular-nums" }}
             >
-              <p className="text-4xl font-semibold text-white md:text-5xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-sm uppercase tracking-wide text-white/60">
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
+              {stat.value}
+            </p>
+            <p className="whitespace-pre-line text-xs font-semibold uppercase tracking-[0.1em] text-white/38">
+              {stat.label}
+            </p>
+            <p className="mt-1 text-[11px] text-white/28">{stat.note}</p>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }

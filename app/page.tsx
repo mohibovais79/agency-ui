@@ -10,16 +10,15 @@ import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col items-center">
+    <>
       <HeroSection />
       <ClientLogosSection />
       <TechMarqueeSection />
-
       <ServicesSection />
       <StatsSection />
       <CaseStudiesSection />
       <TestimonialsSection />
       <ContactSection />
-    </main>
+    </>
   );
 }

@@ -2,68 +2,26 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Traysyz",
-  description: "Make beautiful websites regardless of your design experience.",
+  description:
+    "Strategic Product & AI Partners — We build autonomous AI systems, scalable data infrastructure, and cognitive UX that redefines categories.",
   navItems: [
-    {
-      label: "Home",
-      href: "/",
-    },
-    {
-      label: "Docs",
-      href: "/docs",
-    },
-    {
-      label: "Pricing",
-      href: "/pricing",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
-      label: "About",
-      href: "/about",
-    },
+    { label: "Services",     href: "#services"     },
+    { label: "Case Studies", href: "#case-studies" },
+    { label: "Contact",      href: "#contact"      },
+    { label: "Pricing",      href: "/pricing"      },
+    { label: "Blog",         href: "/blog"         },
   ],
   navMenuItems: [
-    {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Calendar",
-      href: "/calendar",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
+    { label: "Services",     href: "#services"     },
+    { label: "Case Studies", href: "#case-studies" },
+    { label: "Pricing",      href: "/pricing"      },
+    { label: "About",        href: "/about"        },
+    { label: "Blog",         href: "/blog"         },
+    { label: "Contact",      href: "#contact"      },
   ],
   links: {
-    github: "https://github.com/heroui-inc/heroui",
-    twitter: "https://twitter.com/hero_ui",
-    docs: "https://heroui.com",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
+    linkedin: "https://linkedin.com/company/traysyz",
+    facebook: "https://facebook.com/traysyz",
+    email:    "mailto:contact@traysyz.com",
   },
 };
